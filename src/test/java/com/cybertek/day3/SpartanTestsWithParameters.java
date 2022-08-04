@@ -145,7 +145,19 @@ public class SpartanTestsWithParameters {
         assertTrue(response.body().asString().contains("Female"));
         assertTrue(response.body().asString().contains("Janette"));
 
+/*//verify status code 200
+        assertEquals(200,response.statusCode());
+        //verify content type
+        assertEquals("application/json",response.contentType());
+        //verify NotFound in the json payload/body
 
+        //"Female" should be in response payload
+        assertTrue(response.body().asString().contains("Female"));
+        //"Janette" should be in response payload
+        assertTrue(response.body().asString().contains("Janette"));
+
+
+ */
 
     }
 }
