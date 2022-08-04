@@ -1,6 +1,8 @@
 package com.cybertek.day3;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,6 +40,38 @@ public class SpartanTestsWithPath {
     @Test
     public void test1(){
 
+Response response= given().accept(ContentType.JSON)
+        .and().pathParam("id",10)
+        .when().get("api/spartans/{id}");
+
+assertEquals(200, response.statusCode());
+assertEquals("application/json",response.contentType());
+
+// verify each jason key has specific value
+
+        System.out.println(response.path("id").toString());
+        System.out.println(response.path("name").toString());
+        System.out.println(response.path("gender").toString());
+        System.out.println(response.path("phone").toString());
+
+        int id = response.path("id");
+        String name = response.path("name");
+        String gender = response.path("gender");
+        long phone =response.path("phone");
+
+        System.out.println("id = " + id);
+        System.out.println("name = " + name);
+        System.out.println("gender = " + gender);
+        System.out.println("phone = " + phone);
+
+
+
+        // assert the values
+
+        assertEquals(10, id);
+        assertEquals("Lorenza", name);
+        assertEquals("female", gender);
+        assertEquals(3312820936l,phone);
 
     }
 
