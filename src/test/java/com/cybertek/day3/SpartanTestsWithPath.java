@@ -8,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -73,6 +75,32 @@ assertEquals("application/json",response.contentType());
         assertEquals("female", gender);
         assertEquals(3312820936l,phone);
 
+    }
+
+    @DisplayName("GET all spartan and navigate with path")
+    @Test
+    public void test2(){
+       Response response= given().accept(ContentType.JSON)
+                .when().get("api/spartans");
+
+      //  response.prettyPrint();
+        int firtsId=response.path("id[0]");
+        System.out.println("firtsId = " + firtsId);
+
+        String name = response.path("name[0]");
+        System.out.println("name = " + name);
+
+
+
+        String lastFirstName = response.path("name[-1]");
+        System.out.println("lastFirstName = " + lastFirstName);
+
+
+        List<String> names= response.path("name");
+        System.out.println(names);
+
+        for (String n : names) {
+            System.out.println(n);}
     }
 
 }
