@@ -65,7 +65,7 @@ public class SpartanTestsWithParameters {
     public void test2() {
         // these are the initial conditions
         Response response = given().
-                accept(ContentType.JSON)
+                accept(ContentType.JSON)// this line is not a must, since the default type of API is Json, I just put it her to look better, and for better understanding
                 .and().pathParam("id", 500).
                 when().
                 get("api/spartans/{id}");
