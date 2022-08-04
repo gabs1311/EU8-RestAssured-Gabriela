@@ -81,8 +81,39 @@ public class SpartanTestsWithParameters {
     }
 
 
+ /*
+        Given accept type is Json
+        And query parameter values are:
+        gender|Female
+        nameContains|e
+        When user sends GET request to /api/spartans/search
+        Then response status code should be 200
+        And response content-type: application/json
+        And "Female" should be in response payload
+        And "Janette" should be in response payload
+     */
 
 
+    @DisplayName("GET request name api/spartans/search with Query Param ")
 
+    @Test
+    public void test3(){
+
+        Response response = given().accept(ContentType.JSON)
+                .and().queryParam("nameContains", "e")
+                .and().queryParam("gender", "female").
+                when().get("api/spartans/search");
+
+        // we verify the status code
+        assertEquals(200, response.statusCode());
+
+        //we verify the response content-type is application/json
+        assertEquals("application/json", response.contentType());
+        // we verify the word "Blythe" is in the response payload
+        assertTrue(response.body().asString().contains("Female"));
+
+        assertTrue(response.body().asString().contains("Janette"));
+
+    }
 
 }
