@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,6 +45,11 @@ public class ORDSApiTestWithPath extends HrTestBase {
 // print http://44.201.250.13:1000/ords/hr/countries/CA
         String thirdHref=response.path("items[2].links[0].href");
         System.out.println("thirdHref = " + thirdHref);
+
+        // get me all country names
+
+       List<String> allCountryNames = response.path("items.country_name");
+        System.out.println("allCountryNames = " + allCountryNames);
 
     }
 }
