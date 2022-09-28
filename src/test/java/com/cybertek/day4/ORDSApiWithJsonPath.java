@@ -21,8 +21,21 @@ public class ORDSApiWithJsonPath extends HrTestBase {
 @Test
     public void test1(){
 
+ Response response=get("/countries");
+
+// get the second country name with JsonPath
+
+    // to use Json path we assign response to JsonPath
+    JsonPath jsonPath = response.jsonPath();
+
+    String secondCountryName = jsonPath.getString("items[1].country_name");
+    System.out.println("secondCountryName = " + secondCountryName);
 
 
+    // get all country ids
+    // items.country_id
+    List<String> allCountrieIds = jsonPath.getList("items.country_id");
+    System.out.println("allCountrieIds = " + allCountrieIds);
 
 
 }
